@@ -128,6 +128,13 @@ function GroundCoverage({
     return '#00d4ff'; // シアン
   }, []);
   
+  // 向きを計算（法線方向に向ける）- 早期returnの前に移動
+  const quaternion = useMemo(() => {
+    const q = new THREE.Quaternion();
+    q.setFromUnitVectors(new THREE.Vector3(0, 1, 0), normal);
+    return q;
+  }, [normal]);
+  
   // アニメーション
   useFrame((state) => {
     if (!animated) return;
@@ -140,13 +147,6 @@ function GroundCoverage({
   });
   
   if (domeRadius === 0) return null;
-  
-  // 向きを計算（法線方向に向ける）
-  const quaternion = useMemo(() => {
-    const q = new THREE.Quaternion();
-    q.setFromUnitVectors(new THREE.Vector3(0, 1, 0), normal);
-    return q;
-  }, [normal]);
   
   return (
     <group position={position} quaternion={quaternion}>
