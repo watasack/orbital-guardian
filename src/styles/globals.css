@@ -1,0 +1,316 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   フォントのインポート
+   ============================================ */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap');
+
+/* ============================================
+   ベーススタイル
+   ============================================ */
+@layer base {
+  :root {
+    /* カラー変数 */
+    --color-space-900: #050510;
+    --color-space-800: #0a0a1a;
+    --color-space-700: #0f0f1a;
+    --color-space-600: #1a1a2e;
+    --color-space-500: #252540;
+    
+    --color-cyber-500: #06b6d4;
+    --color-cyber-400: #22d3ee;
+    
+    --color-status-safe: #10b981;
+    --color-status-warning: #f59e0b;
+    --color-status-danger: #ef4444;
+    
+    /* グロー効果 */
+    --glow-cyan: 0 0 20px rgba(6, 182, 212, 0.4);
+    --glow-danger: 0 0 20px rgba(239, 68, 68, 0.4);
+  }
+  
+  html {
+    @apply antialiased;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-space-900 text-gray-100;
+    font-family: 'Inter', 'Noto Sans JP', sans-serif;
+  }
+  
+  /* スクロールバーのカスタマイズ */
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-space-800;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-space-500 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-space-600;
+  }
+  
+  /* 選択テキストのスタイル */
+  ::selection {
+    @apply bg-cyber-500/30 text-white;
+  }
+}
+
+/* ============================================
+   コンポーネントスタイル
+   ============================================ */
+@layer components {
+  /* パネル */
+  .panel {
+    @apply bg-space-700/80 backdrop-blur-md border border-white/10 rounded-lg;
+  }
+  
+  .panel-elevated {
+    @apply bg-space-600/90 backdrop-blur-md border border-white/10 rounded-lg shadow-lg;
+  }
+  
+  /* ガラスモーフィズム */
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl;
+  }
+  
+  .glass-cyber {
+    @apply bg-cyber-500/5 backdrop-blur-xl border border-cyber-500/20 rounded-xl;
+    box-shadow: var(--glow-cyan);
+  }
+  
+  /* ボタン */
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-space-900;
+  }
+  
+  .btn-primary {
+    @apply btn bg-cyber-500 text-white hover:bg-cyber-600;
+    @apply focus:ring-cyber-500;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-space-600 text-gray-200 hover:bg-space-500;
+    @apply border border-white/10;
+    @apply focus:ring-white/20;
+  }
+  
+  .btn-danger {
+    @apply btn bg-status-danger text-white hover:bg-red-600;
+    @apply focus:ring-status-danger;
+  }
+  
+  .btn-ghost {
+    @apply btn bg-transparent text-gray-300 hover:bg-white/5 hover:text-white;
+  }
+  
+  /* 入力フィールド */
+  .input {
+    @apply w-full px-4 py-2 bg-space-800 border border-white/10 rounded-lg;
+    @apply text-gray-100 placeholder-gray-500;
+    @apply focus:outline-none focus:border-cyber-500 focus:ring-1 focus:ring-cyber-500;
+    @apply transition-colors duration-200;
+  }
+  
+  /* ラベル */
+  .label {
+    @apply block text-sm font-medium text-gray-400 mb-1;
+  }
+  
+  /* ステータスバッジ */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .badge-safe {
+    @apply badge bg-status-safe/20 text-status-safe;
+  }
+  
+  .badge-warning {
+    @apply badge bg-status-warning/20 text-status-warning;
+  }
+  
+  .badge-danger {
+    @apply badge bg-status-danger/20 text-status-danger;
+  }
+  
+  .badge-info {
+    @apply badge bg-cyber-500/20 text-cyber-400;
+  }
+  
+  /* カード */
+  .card {
+    @apply panel p-4;
+  }
+  
+  .card-interactive {
+    @apply card cursor-pointer;
+    @apply hover:bg-space-600/80 hover:border-white/20;
+    @apply transition-all duration-200;
+  }
+  
+  /* ダッシュボードウィジェット */
+  .widget {
+    @apply panel p-4;
+  }
+  
+  .widget-header {
+    @apply flex items-center justify-between mb-3;
+  }
+  
+  .widget-title {
+    @apply text-sm font-medium text-gray-400 uppercase tracking-wider;
+  }
+  
+  .widget-value {
+    @apply text-2xl font-bold font-mono text-white;
+  }
+  
+  /* 数値表示（モノスペース） */
+  .mono {
+    @apply font-mono tabular-nums;
+  }
+  
+  /* グリッドオーバーレイ */
+  .grid-overlay {
+    background-image: 
+      linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  
+  /* スキャンライン効果 */
+  .scanlines {
+    position: relative;
+  }
+  
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.1) 0px,
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+  }
+  
+  /* パルス効果 */
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 5px rgba(6, 182, 212, 0.4);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.8);
+    }
+  }
+  
+  /* 危険パルス */
+  .pulse-danger {
+    animation: pulse-danger 1s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-danger {
+    0%, 100% {
+      box-shadow: 0 0 5px rgba(239, 68, 68, 0.4);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
+    }
+  }
+}
+
+/* ============================================
+   ユーティリティ
+   ============================================ */
+@layer utilities {
+  /* テキストグラデーション */
+  .text-gradient-cyber {
+    @apply bg-gradient-to-r from-cyber-400 to-blue-400 bg-clip-text text-transparent;
+  }
+  
+  /* ノイズ背景 */
+  .noise-bg {
+    position: relative;
+  }
+  
+  .noise-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+  
+  /* フェードイン */
+  .fade-in {
+    animation: fade-in 0.3s ease-out;
+  }
+  
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* スライドイン */
+  .slide-in-right {
+    animation: slide-in-right 0.3s ease-out;
+  }
+  
+  @keyframes slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+/* ============================================
+   3Dキャンバス用スタイル
+   ============================================ */
+.canvas-container {
+  @apply w-full h-full;
+}
+
+.canvas-container canvas {
+  @apply outline-none;
+}
+
+/* ツールチップ */
+.tooltip-3d {
+  @apply absolute pointer-events-none;
+  @apply glass px-3 py-2 text-sm;
+  @apply transform -translate-x-1/2 -translate-y-full;
+  @apply opacity-0 transition-opacity duration-200;
+}
+
+.tooltip-3d.visible {
+  @apply opacity-100;
+}
